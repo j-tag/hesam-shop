@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import { Product } from "../types"
 
@@ -10,6 +11,13 @@ export default function ProductCard({ product }: { product: Product }) {
       <p style={{ color: product.price > 20 ? "red" : "green" }}>
         ${product.price}
       </p>
+      <button
+        onClick={() => {
+          alert(`Product "${product.name}" added to cart!`)
+        }}
+      >
+        Add to Cart
+      </button>
     </div>
   )
 }
