@@ -1,4 +1,5 @@
-import ProductCard from "../components/ProductCard"
+import { readFile } from "node:fs/promises"
+import ProductList from "../components/ProductList"
 
 const products = [
   {
@@ -32,14 +33,8 @@ const products = [
   },
 ]
 
-export default function Page() {
-  return (
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>
-          <ProductCard product={product} />
-        </li>
-      ))}
-    </ul>
-  )
+export default async function Page() {
+  const data = await readFile("/tmp/cart.json", "utf8")
+
+  return <ProductList products={products} initialCart={JSON.parse(data)} />
 }

@@ -2,7 +2,13 @@
 import Image from "next/image"
 import { Product } from "../types"
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  onAddToCartAction,
+}: {
+  product: Product
+  onAddToCartAction: () => void
+}) {
   return (
     <div className="product-card">
       <Image src={product.image} alt={product.name} width={100} height={100} />
@@ -13,7 +19,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </p>
       <button
         onClick={() => {
-          alert(`Product "${product.name}" added to cart!`)
+          onAddToCartAction()
         }}
       >
         Add to Cart
