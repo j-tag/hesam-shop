@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import { Product } from "../types"
+import Link from "next/link"
 
 export default function ProductCard({
   product,
@@ -24,6 +25,7 @@ export default function ProductCard({
       >
         Add to Cart
       </button>
+      <Link href={`/marketplace/product/${product.id}`}>View Details</Link>
     </div>
   )
 }
