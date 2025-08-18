@@ -18,13 +18,7 @@ export default function ProductCard({
       <p style={{ color: product.price > 20 ? "red" : "green" }}>
         ${product.price}
       </p>
-      <button
-        onClick={() => {
-          onAddToCartAction()
-        }}
-      >
-        Add to Cart
-      </button>
+      <button onClick={onAddToCartAction}>Add to Cart</button>
       <Link href={`/marketplace/product/${product.id}`}>View Details</Link>
     </div>
   )
