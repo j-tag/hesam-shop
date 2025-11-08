@@ -3,6 +3,16 @@ import { useState } from "react"
 import ProductCard from "./ProductCard"
 import { Product } from "../types"
 import { saveCart } from "../actions/cart"
+import {
+  Button,
+  List,
+  SimpleGrid,
+  Stack,
+  ThemeIcon,
+  Title,
+} from "@mantine/core"
+import { IconCircleCheck } from "@tabler/icons-react"
+import { notifications } from "@mantine/notifications"
 
 export default function ProductList({
   products,
@@ -15,28 +25,58 @@ export default function ProductList({
 
   return (
     <>
-      <div>
-        <h3>Your cart</h3>
-        <ul>
+      <Stack>
+        <Title order={3}>Your cart</Title>
+        <List
+          spacing="xs"
+          size="sm"
+          center
+          icon={
+            <ThemeIcon color="teal" size={24} radius="xl">
+              <IconCircleCheck size={16} />
+            </ThemeIcon>
+          }
+        >
           {cart.map((product) => (
-            <li key={product.id}>
+            <List.Item key={product.id}>
               {product.name} - ${product.price}
-            </li>
+            </List.Item>
           ))}
-        </ul>
-        <button onClick={() => saveCart(cart)}>Save Cart</button>
-      </div>
+        </List>
+        <Button
+          maw="fit-content"
+          variant="gradient"
+          gradient={{ from: "green", to: "yellow", deg: 195 }}
+          size="compact-md"
+          onClick={() => {
+            saveCart(cart)
+
+            notifications.show({
+              title: "Your cart is saved",
+              message: "Do not forget to checkout! 🌟",
+            })
+          }}
+        >
+          Save Cart
+        </Button>
+      </Stack>
       <br />
-      <ul>
+      <SimpleGrid cols={{ base: 1, xs: 1, sm: 5 }}>
         {products.map((product) => (
-          <li key={product.id}>
-            <ProductCard
-              product={product}
-              onAddToCartAction={() => setCart([...cart, product])}
-            />
-          </li>
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCartAction={() => {
+              setCart([...cart, product])
+
+              notifications.show({
+                title: "Item added",
+                message: "Item addet to your cart! 💪🏻🛒",
+              })
+            }}
+          />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   )
 }
