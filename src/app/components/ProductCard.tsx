@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { Product } from "../types"
+import type { Product } from "../types"
 import Link from "next/link"
 import { Badge, Button, Card, Group, Text } from "@mantine/core"
 
@@ -12,18 +12,6 @@ export default function ProductCard({
   onAddToCartAction: () => void
 }) {
   return (
-<<<<<<< HEAD
-    <div className="product-card">
-      <Image src={product.image} alt={product.name} width={100} height={100} />
-      <h3>{product.name}</h3>
-      <p>{product.description}</p>
-      <p style={{ color: product.price > 20 ? "red" : "green" }}>
-        ${product.price}
-      </p>
-      <button onClick={onAddToCartAction}>Add to Cart</button>
-      <Link href={`/marketplace/product/${product.id}`}>View Details</Link>
-    </div>
-=======
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
@@ -64,6 +52,5 @@ export default function ProductCard({
         </Button>
       </Button.Group>
     </Card>
->>>>>>> bb1d759 (feat: implement Mantine ui in project)
   )
 }
