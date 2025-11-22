@@ -19,7 +19,7 @@ export default async function Page({
 
   return (
     <>
-      <h1>{product.name}</h1>
+      <h1>Product: {product.name}</h1>
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
       <Image src={product.image} alt={product.name} width={200} height={200} />
