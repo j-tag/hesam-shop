@@ -67,7 +67,7 @@ export default function RootLayout({
             </AppShellHeader>
 
             <AppShellMain>{children}</AppShellMain>
-            <AppShellFooter>Thanks for visiting Hesam Shop</AppShellFooter>
+            <AppShellFooter>Thanks for visiting Newsha Shop</AppShellFooter>
           </AppShell>
         </MantineProvider>
       </body>
