@@ -25,6 +25,7 @@ export default function ProductList({
 
   return (
     <>
+    <Title order={1}>Yeah! Life can be very nice!</Title>
       <Stack>
         <Title order={3}>Your cart</Title>
         <List
