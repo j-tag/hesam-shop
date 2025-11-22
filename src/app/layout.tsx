@@ -16,6 +16,7 @@ import {
   mantineHtmlProps,
   Group,
   Button,
+  Text
 } from "@mantine/core"
 import Link from "next/link"
 import { Notifications } from "@mantine/notifications"
@@ -67,7 +68,7 @@ export default function RootLayout({
             </AppShellHeader>
 
             <AppShellMain>{children}</AppShellMain>
-            <AppShellFooter>Thanks for visiting Hesam Shop</AppShellFooter>
+            <AppShellFooter><Text>Thanks for visiting Hesam Shop</Text></AppShellFooter>
           </AppShell>
         </MantineProvider>
       </body>
