@@ -14,7 +14,7 @@ import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { startTransition, useActionState } from "react"
 import { sendComment } from "../actions/comments"
-import { SavedCommentForm } from "../types"
+import { SavedCommentForm } from "@/app/db/types"
 
 export default function CommentForm({
   comments,

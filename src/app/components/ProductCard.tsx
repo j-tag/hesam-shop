@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import type { Product } from "../types"
+import type { Product } from "@/app/db/types"
 import Link from "next/link"
 import { Badge, Button, Card, Group, Text } from "@mantine/core"
 
@@ -46,7 +46,7 @@ export default function ProductCard({
         <Button
           radius="md"
           component={Link}
-          href={`/marketplace/product/${product.id}`}
+          href={`/marketplace/product/${product._id}`}
         >
           View Details
         </Button>

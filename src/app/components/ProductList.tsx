@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import ProductCard from "./ProductCard"
-import { Product } from "../types"
+import { Product } from "@/app/db/types"
 import { saveCart } from "../actions/cart"
 import {
   Button,
@@ -25,7 +25,7 @@ export default function ProductList({
 
   return (
     <>
-    <Title order={1}>Yeah! Life can be very nice!</Title>
+      <Title order={1}>Yeah! Life can be very nice!</Title>
       <Stack>
         <Title order={3}>Your cart</Title>
         <List
@@ -39,7 +39,7 @@ export default function ProductList({
           }
         >
           {cart.map((product) => (
-            <List.Item key={product.id}>
+            <List.Item key={product._id}>
               {product.name} - ${product.price}
             </List.Item>
           ))}
@@ -65,7 +65,7 @@ export default function ProductList({
       <SimpleGrid cols={{ base: 1, xs: 1, sm: 5 }}>
         {products.map((product) => (
           <ProductCard
-            key={product.id}
+            key={product._id}
             product={product}
             onAddToCartAction={() => {
               setCart([...cart, product])
