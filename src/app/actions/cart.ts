@@ -1,16 +1,18 @@
 "use server"
-import { Product } from "../types"
-import { writeFile } from "node:fs"
+import { Product } from "@/app/db/types"
+import { redis } from "@/app/lib/redis"
+
+export async function getCart(): Promise<Product[]> {
+  const value = await redis.get("cart-test-username")
+
+  if (!value) {
+    return []
+  }
+
+  return JSON.parse(value)
+}
 
 export async function saveCart(products: Product[]) {
-  const filePath = "/tmp/cart.json"
-  const textContent = JSON.stringify(products)
-
-  writeFile(filePath, textContent, (err) => {
-    if (err) {
-      console.error("Error writing to file:", err)
-      return
-    }
-    console.log("Cart successfully saved to", filePath)
-  })
+  redis.set("cart-test-username", JSON.stringify(products)).catch(console.error)
+  return null
 }
