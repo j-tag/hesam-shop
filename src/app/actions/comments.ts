@@ -1,21 +1,29 @@
 "use server"
 
-import { readFile, writeFile } from "node:fs/promises"
-import { CommentForm } from "../types"
+import { CommentForm, SavedCommentForm } from "@/app/db/types"
 import { revalidatePath } from "next/cache"
+import { mongo } from "@/app/lib/mongo"
 
 export async function sendComment(
   prevState: CommentForm | null,
   values: CommentForm,
 ) {
-  const data = await readFile("/tmp/comments.json", "utf8")
-  const comments = JSON.parse(data)
-
-  const newComments = [...comments, { ...values, id: crypto.randomUUID() }]
-
-  writeFile("/tmp/comments.json", JSON.stringify(newComments), "utf8").catch(
-    console.error,
-  )
+  mongo
+    .collection<{
+      username: string
+      comments: SavedCommentForm[]
+    }>("comments")
+    .updateOne(
+      { username: "test-username" },
+      {
+        $push: {
+          comments: { ...values, id: crypto.randomUUID() },
+        },
+        $setOnInsert: { username: "test-username" },
+      },
+      { upsert: true },
+    )
+    .catch(console.error)
 
   revalidatePath("/marketPlace/product/[id]", "page")
 
@@ -23,6 +31,13 @@ export async function sendComment(
 }
 
 export async function getComments() {
-  const data = await readFile("/tmp/comments.json", "utf8")
-  return JSON.parse(data)
+  const data = await mongo
+    .collection("comments")
+    .findOne({ username: "test-username" })
+
+  if (!data) {
+    return []
+  }
+
+  return data.comments
 }
