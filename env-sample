@@ -1,0 +1,5 @@
+# MongoDb URI
+MONGODB_URI=mongodb://user:password@127.0.0.1:27017/shop
+
+# MongoDb DB name
+MONGODB_DB_NAME=shop
