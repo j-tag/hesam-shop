@@ -1,0 +1,30 @@
+services:
+
+  payment:
+    image: node:22
+    volumes:
+      - ./payment:/app
+    ports:
+      - "34333:3000"
+    deploy:
+      mode: replicated
+      replicas: 6
+    working_dir: /app
+    command: npm run start
+
+  db:
+    image: mongo:8.2.2
+    ports:
+      - "34555:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+
+  redis:
+    image: redis:8.4.0
+    ports:
+      - "34556:6379"
+    volumes:
+      - ./redis-data:/data
