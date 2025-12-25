@@ -10,11 +10,13 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core"
+import { zod4Resolver } from "mantine-form-zod-resolver"
 import { useForm } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { startTransition, useActionState } from "react"
 import { sendComment } from "../actions/comments"
 import { SavedCommentForm } from "@/app/db/types"
+import { CommentFormSchema } from "@/app/lib/schema"
 
 export default function CommentForm({
   comments,
@@ -29,10 +31,7 @@ export default function CommentForm({
       comment: "",
     },
 
-    validate: {
-      name: (value) => (value.length > 3 ? null : "Invalid name"),
-      comment: (value) => (value.length > 10 ? null : "Invalid comment"),
-    },
+    validate: zod4Resolver(CommentFormSchema),
   })
 
   return (
