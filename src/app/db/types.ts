@@ -1,3 +1,5 @@
+import { CommentForm } from "@/app/lib/schema"
+
 export type Product = {
   _id: string
   name: string
@@ -6,5 +8,4 @@ export type Product = {
   image: string
 }
 
-export type CommentForm = { name: string; comment: string }
 export type SavedCommentForm = CommentForm & { id: string }
